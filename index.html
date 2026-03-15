@@ -92,7 +92,9 @@
         .video-wrapper.tiktok { padding-bottom: 177%; }
         .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
 
-        .map-container { border: 4px solid #000; box-shadow: 12px 12px 0px var(--primary); overflow: hidden; height: 450px; }
+        /* MAPA Y BOTÓN */
+        .map-container { border: 4px solid #000; box-shadow: 12px 12px 0px var(--primary); overflow: hidden; height: 450px; margin-bottom: 30px; }
+        .map-footer { text-align: center; margin-top: 20px; }
 
         .whatsapp {
             position: fixed; bottom: 30px; right: 30px; background: #25D366; color: white;
@@ -170,8 +172,11 @@
     </div>
     <div class="map-container" data-aos="zoom-in">
         <iframe 
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3306.0123456789!2d-118.336!3d34.045!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80c2b85777777777%3A0x7777777777777777!2s4716%20Lomita%20St%2C%20Los%20Angeles%2C%20CA%2090019!5e0!3m2!1ses!2sus!4v1700000000000" 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3306.0223654492985!2d-118.34145922339893!3d34.043329217539515!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80c2b9a717277e9b%3A0xc48c9735d55e0591!2s4716%20Lomita%20St%2C%20Los%20Angeles%2C%20CA%2090019!5e0!3m2!1ses-419!2sus!4v1710450000000!5m2!1ses-419!2sus" 
             width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+    </div>
+    <div class="map-footer" data-aos="fade-up">
+        <a class="btn" href="https://www.google.com/maps/dir/?api=1&destination=4716+Lomita+St+Los+Angeles+CA+90019" target="_blank">Abrir en Google Maps</a>
     </div>
 </section>
 
@@ -203,6 +208,8 @@
                     if (link.includes("tiktok.com")) {
                         const videoId = link.match(/\/video\/(\d+)/)?.[1];
                         return `<div class="video-wrapper tiktok"><iframe src="https://www.tiktok.com/embed/v2/${videoId}" allowfullscreen></iframe></div>`;
+                    } else if (link.includes("facebook.com") || link.includes("fb.watch")) {
+                        return `<div class="video-wrapper"><iframe src="https://www.facebook.com/plugins/video.php?href=${encodeURIComponent(link)}&show_text=0" allowfullscreen></iframe></div>`;
                     } else {
                         let yid = link.includes("v=") ? link.split("v=")[1].split("&")[0] : 
                                   link.includes("youtu.be/") ? link.split("youtu.be/")[1].split("?")[0] : link;
