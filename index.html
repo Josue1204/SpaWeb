@@ -3,57 +3,116 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Spa Terapéutico</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <title>Erika | Spa Terapéutico Profesional</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 
     <style>
-        :root { --primary: #2bb673; --bg-body: #f4f7f6; --text-main: #1a1a1a; }
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
-        body { background: var(--bg-body); color: var(--text-main); line-height: 1.6; }
-        header { position: fixed; top: 0; width: 100%; background: white; box-shadow: 0 5px 20px rgba(0,0,0,.08); z-index: 100; }
-        nav { max-width: 1200px; margin: auto; display: flex; justify-content: space-between; align-items: center; padding: 20px; }
-        nav h2 { color: var(--primary); font-weight: 800; text-transform: uppercase; }
-        nav ul { display: flex; list-style: none; gap: 25px; }
-        nav a { text-decoration: none; color: #333; font-weight: 600; }
-        
-        .hero { height: 100vh; background: linear-gradient(rgba(0,0,0,.35),rgba(0,0,0,.35)), url('https://images.unsplash.com/photo-1544161515-4ab6ce6db874'); background-size: cover; background-position: center; display: flex; align-items: center; justify-content: center; text-align: center; color: white; padding: 20px; }
-        .hero h1 { font-size: clamp(40px, 8vw, 60px); margin-bottom: 20px; font-weight: 800; }
-        
-        .btn { background: var(--primary); color: white; padding: 15px 35px; border-radius: 40px; text-decoration: none; font-weight: 600; display: inline-block; transition: 0.3s; border: none; }
-        
-        section { padding: 80px 20px; }
-        .container { max-width: 1200px; margin: auto; }
-        h2.section-title { font-size: 2.5rem; text-align: center; margin-bottom: 40px; font-weight: 800; }
+        :root {
+            --primary: #1a8c54; 
+            --bg-body: #e5e7eb; 
+            --card-white: #ffffff;
+            --text-main: #000000;
+        }
 
-        .services { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; }
-        .card { background: white; border-radius: 15px; padding: 30px; box-shadow: 0 10px 30px rgba(0,0,0,.08); }
-        .price-tag { font-size: 2.5rem; font-weight: 800; color: var(--primary); margin: 10px 0; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
         
-        /* VIDEOS */
-        .video-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
-        .video-wrapper { position: relative; padding-bottom: 56.25%; height: 0; background: #000; border-radius: 15px; overflow: hidden; }
+        body { background: var(--bg-body); color: var(--text-main); line-height: 1.6; }
+
+        header {
+            position: fixed; top: 0; width: 100%;
+            background: #ffffff; z-index: 100; 
+            border-bottom: 4px solid #000;
+        }
+
+        nav { max-width: 1200px; margin: auto; display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; }
+        nav h2 { color: var(--primary); font-size: 2rem; font-weight: 800; text-transform: uppercase; }
+        nav ul { display: flex; list-style: none; gap: 20px; }
+        nav a { text-decoration: none; color: var(--text-main); font-weight: 800; font-size: 0.9rem; }
+
+        .hero {
+            height: 90vh;
+            background: linear-gradient(rgba(255,255,255,0.2), rgba(255,255,255,0.2)), 
+                        url('https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&q=80');
+            background-size: cover; background-position: center;
+            display: flex; align-items: center; justify-content: center; text-align: center;
+            border-bottom: 4px solid #000;
+        }
+
+        .hero h1 { 
+            font-size: clamp(40px, 10vw, 80px); 
+            color: #000; font-weight: 800;
+            text-shadow: 4px 4px 0px #fff;
+            line-height: 1.1;
+            text-transform: uppercase;
+        }
+
+        .btn {
+            background: var(--primary); color: white; padding: 20px 45px; border-radius: 0px;
+            text-decoration: none; font-weight: 800; display: inline-block;
+            border: 4px solid #000; box-shadow: 6px 6px 0px #000;
+            transition: 0.2s; cursor: pointer; text-transform: uppercase;
+        }
+        .btn:hover { transform: translate(-2px, -2px); box-shadow: 9px 9px 0px #000; }
+
+        section { padding: 100px 20px; max-width: 1200px; margin: auto; }
+        h2.section-title { font-size: 3.5rem; margin-bottom: 60px; text-align: center; font-weight: 800; color: #000; text-transform: uppercase; }
+
+        .about-container { 
+            display: flex; align-items: center; gap: 40px; flex-wrap: wrap; 
+            background: var(--card-white); border: 4px solid #000; padding: 40px;
+            box-shadow: 12px 12px 0px var(--primary);
+        }
+        .about-text { flex: 1; min-width: 300px; }
+        .about-text h2 { font-size: 2.5rem; margin-bottom: 20px; font-weight: 800; }
+        .about-text p { font-weight: 700; font-size: 1.1rem; color: #000; margin-bottom: 15px; }
+        .about-img { flex: 1; min-width: 300px; border: 4px solid #000; }
+        .about-img img { width: 100%; display: block; }
+
+        .grid-layout { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; }
+        
+        .card {
+            background: var(--card-white); border: 4px solid #000;
+            padding: 40px; box-shadow: 10px 10px 0px var(--primary);
+            transition: 0.2s;
+        }
+        .card:hover { transform: translate(-4px, -4px); box-shadow: 14px 14px 0px #000; }
+        .card h3 { color: var(--primary); font-size: 2rem; margin-bottom: 15px; font-weight: 800; text-transform: uppercase; }
+
+        .price-tag { font-size: 4rem; font-weight: 900; color: #000; margin: 15px 0; }
+
+        .video-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; align-items: start; }
+        .video-wrapper {
+            position: relative; padding-bottom: 56.25%; height: 0;
+            border: 4px solid #000; box-shadow: 10px 10px 0px var(--primary);
+            background: #000; margin-bottom: 20px; overflow: hidden;
+        }
         .video-wrapper.tiktok { padding-bottom: 177%; }
         .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
 
-        /* MAPA */
-        .map-container { 
-            width: 100%; height: 450px; border-radius: 20px; overflow: hidden; 
-            border: 5px solid white; box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
-        .address-box { text-align: center; margin-bottom: 20px; font-size: 1.2rem; font-weight: 600; }
+        .map-container { border: 4px solid #000; box-shadow: 12px 12px 0px var(--primary); overflow: hidden; height: 450px; }
 
-        .whatsapp { position: fixed; bottom: 25px; right: 25px; background: #25D366; color: white; font-size: 28px; width: 65px; height: 65px; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; z-index: 1000; }
-        footer { background: #111; color: white; text-align: center; padding: 40px; }
+        .whatsapp {
+            position: fixed; bottom: 30px; right: 30px; background: #25D366; color: white;
+            width: 75px; height: 75px; display: flex; align-items: center;
+            justify-content: center; text-decoration: none; font-size: 45px; z-index: 1000;
+            border: 4px solid #000; box-shadow: 6px 6px 0px #000;
+        }
+
+        footer { background: #000; color: #fff; padding: 60px 20px; text-align: center; }
+        footer p { font-weight: 800; font-size: 1.2rem; text-transform: uppercase; }
     </style>
 </head>
 <body>
 
 <header>
     <nav>
-        <h2 id="nav-title">SPA</h2>
+        <h2 id="nav-title">ERIKA</h2>
         <ul>
-            <li><a href="#servicios">Servicios</a></li>
+            <li><a href="#about">Sobre Mí</a></li>
+            <li><a href="#servicios">Tarifas</a></li>
             <li><a href="#videos">Videos</a></li>
             <li><a href="#ubicacion">Ubicación</a></li>
         </ul>
@@ -61,92 +120,86 @@
 </header>
 
 <section class="hero">
-    <div>
-        <h1 id="hero-title">Relaja tu cuerpo</h1>
-        <p id="hero-desc" style="font-size: 20px;">Cargando...</p>
-        <br>
-        <a class="btn" href="https://wa.me/13237932528">Reservar por WhatsApp</a>
+    <div data-aos="zoom-in">
+        <h1>TU BIENESTAR<br>EMPIEZA AQUÍ</h1>
+        <br><br>
+        <a class="btn" href="https://wa.me/13237932528">Reserva tu cita</a>
+    </div>
+</section>
+
+<section id="about">
+    <div class="about-container" data-aos="fade-up">
+        <div class="about-text">
+            <h2>SOBRE MÍ</h2>
+            <p id="about-text-p">Cargando biografía...</p>
+        </div>
+        <div class="about-img">
+            <img src="https://images.unsplash.com/photo-1596178065887-1198b6148b2b?auto=format&fit=crop&q=80" alt="Erika">
+        </div>
     </div>
 </section>
 
 <section id="servicios">
-    <div class="container">
-        <h2 class="section-title">Servicios y Tarifas</h2>
-        <div class="services">
-            <div class="card">
-                <h3>Masaje Relajante</h3>
-                <div class="price-tag" id="price-1">$0</div>
-                <p>Reduce el estrés y mejora el descanso.</p>
-            </div>
-            <div class="card">
-                <h3>Acomodación Matriz</h3>
-                <div class="price-tag" id="price-2">$0</div>
-                <p>Especializado en salud femenina y fertilidad.</p>
-            </div>
+    <h2 class="section-title">Nuestras Tarifas</h2>
+    <div class="grid-layout">
+        <div class="card" data-aos="flip-left">
+            <h3>Básico</h3>
+            <p>Masaje Relajante</p>
+            <div class="price-tag" id="price-1">$0</div>
+            <a class="btn" href="https://wa.me/13237932528?text=Hola, quiero el plan básico">Elegir</a>
+        </div>
+        <div class="card" data-aos="flip-left" data-aos-delay="100" style="background: #f0fdf4;">
+            <h3>Premium</h3>
+            <p>Acomodación de Matriz</p>
+            <div class="price-tag" id="price-2">$0</div>
+            <a class="btn" href="https://wa.me/13237932528?text=Hola, quiero el plan premium">Elegir</a>
         </div>
     </div>
 </section>
 
 <section id="videos">
-    <div class="container">
-        <h2 class="section-title">Galería de Videos</h2>
-        <div class="video-grid" id="video-container"></div>
-    </div>
+    <h2 class="section-title">Videos</h2>
+    <div class="video-grid" id="video-container">
+        </div>
 </section>
 
-<section id="ubicacion" style="background: #fff;">
-    <div class="container">
-        <h2 class="section-title">Nuestra Ubicación</h2>
-        <div class="address-box">
-            📍 <span id="address-text">4716 Lomita st. Los Angeles CA, 90019</span>
-        </div>
-        <div class="map-container">
-            <iframe 
-                id="google-map"
-                width="100%" 
-                height="100%" 
-                style="border:0" 
-                loading="lazy" 
-                allowfullscreen 
-                referrerpolicy="no-referrer-when-downgrade"
-                src="https://www.google.com/maps/embed/v1/place?key=REEMPLAZAR_CON_TU_API_KEY&q=4716+Lomita+st+Los+Angeles+CA+90019">
-            </iframe>
-            </div>
+<section id="ubicacion">
+    <h2 class="section-title">Ubicación</h2>
+    <div style="text-align: center; margin-bottom: 30px;">
+        <p style="font-weight: 800; font-size: 1.5rem;">📍 4716 Lomita st. Los Angeles CA, 90019</p>
+    </div>
+    <div class="map-container" data-aos="zoom-in">
+        <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3306.0123456789!2d-118.336!3d34.045!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80c2b85777777777%3A0x7777777777777777!2s4716%20Lomita%20St%2C%20Los%20Angeles%2C%20CA%2090019!5e0!3m2!1ses!2sus!4v1700000000000" 
+            width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
     </div>
 </section>
 
 <a class="whatsapp" href="https://wa.me/13237932528">💬</a>
 
 <footer>
-    <p id="footer-text">© 2026 Spa Terapéutico</p>
+    <p id="footer-text">© 2026 ERIKA SPA TERAPÉUTICO</p>
 </footer>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
 <script>
+    AOS.init({duration: 1000, once: true});
+
     async function actualizarWeb() {
         try {
             const res = await fetch('data/config.json?v=' + new Date().getTime());
             const data = await res.json();
 
-            // 1. Textos y Precios
-            document.getElementById('nav-title').innerText = data.titulo;
+            document.getElementById('nav-title').innerText = data.titulo || "ERIKA";
+            document.getElementById('about-text-p').innerText = data.sobre_mi;
+            document.getElementById('price-1').innerText = `$${data.precio_basico}`;
+            document.getElementById('price-2').innerText = `$${data.precio_premium}`;
             document.getElementById('footer-text').innerText = `© 2026 ${data.titulo}`;
-            document.getElementById('hero-desc').innerText = data.sobre_mi;
-            document.getElementById('price-1').innerText = `$${data.price_basico || data.precio_basico}`;
-            document.getElementById('price-2').innerText = `$${data.price_premium || data.precio_premium}`;
 
-            // 2. Mapa Dinámico
-            // Si en el JSON añades un campo "direccion", el mapa se actualizará solo
-            const direccion = data.direccion || "4716 Lomita st. Los Angeles CA, 90019";
-            document.getElementById('address-text').innerText = direccion;
-            const mapUrl = `https://maps.google.com/maps?q=${encodeURIComponent(direccion)}&t=&z=15&ie=UTF8&iwloc=&output=embed`;
-            document.getElementById('google-map').src = mapUrl;
-
-            // 3. Videos
             const container = document.getElementById('video-container');
-            if (data.videos && data.videos.length > 0) {
+            if (data.videos) {
                 container.innerHTML = data.videos.map(url => {
                     const link = url.trim();
-                    if (!link) return '';
                     if (link.includes("tiktok.com")) {
                         const videoId = link.match(/\/video\/(\d+)/)?.[1];
                         return `<div class="video-wrapper tiktok"><iframe src="https://www.tiktok.com/embed/v2/${videoId}" allowfullscreen></iframe></div>`;
@@ -156,8 +209,9 @@
                         return `<div class="video-wrapper"><iframe src="https://www.youtube.com/embed/${yid}" allowfullscreen></iframe></div>`;
                     }
                 }).join('');
+                AOS.refresh();
             }
-        } catch (e) { console.error("Error:", e); }
+        } catch (e) { console.error("Error al cargar datos:", e); }
     }
     window.addEventListener('load', actualizarWeb);
 </script>
