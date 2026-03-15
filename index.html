@@ -156,57 +156,82 @@
 </footer>
 
 <script>
-    // FUNCIÓN DE CARGA DINÁMICA (CONEXIÓN CON ADMIN)
     async function cargarContenido() {
+        console.log("Iniciando carga de contenido desde el Admin...");
         try {
-            // Buscamos el archivo que genera el Admin (añadimos tiempo para evitar cache)
-            const response = await fetch('data/config.json?v=' + new Date().getTime());
+            // Añadimos un número aleatorio al final para engañar al navegador y que no use la versión vieja
+            const cacheBuster = Math.random().toString(36).substring(7);
+            const response = await fetch('data/config.json?cb=' + cacheBuster);
+            
+            if (!response.ok) throw new Error("No se pudo encontrar el archivo config.json");
+            
             const data = await response.json();
+            console.log("Datos recibidos del panel:", data);
 
-            // 1. Actualizar textos básicos
-            if(data.titulo) {
+            // 1. Actualizar Textos
+            if (data.titulo) {
                 document.getElementById('nav-title').innerText = data.titulo;
-                document.getElementById('footer-text').innerText = `© 2026 ${data.titulo}`;
+                document.title = data.titulo + " | Spa Terapéutico";
             }
-            if(data.sobre_mi) document.getElementById('hero-desc').innerText = data.sobre_mi;
+            
+            if (data.sobre_mi) {
+                document.getElementById('hero-desc').innerText = data.sobre_mi;
+            }
 
-            // 2. Cargar Videos de YouTube, TikTok o Facebook
+            // 2. Cargar Videos (Lógica Multiformato)
             const container = document.getElementById('video-container');
-            if (data.videos && data.videos.length > 0) {
-                container.innerHTML = data.videos.map(url => {
+            
+            // Verificamos si hay videos, si no, limpiamos el área
+            if (data.videos && Array.isArray(data.videos)) {
+                container.innerHTML = ""; // Limpiar antes de llenar
+
+                data.videos.forEach(url => {
                     const link = url.trim();
-                    
-                    // Lógica para TIKTOK
+                    if (!link) return;
+
+                    let htmlVideo = "";
+
+                    // CASO TIKTOK
                     if (link.includes("tiktok.com")) {
                         const videoId = link.match(/\/video\/(\d+)/)?.[1];
-                        return `<div class="video-wrapper tiktok"><iframe src="https://www.tiktok.com/embed/v2/${videoId}" allowfullscreen></iframe></div>`;
+                        if (videoId) {
+                            htmlVideo = `<div class="video-wrapper tiktok"><iframe src="https://www.tiktok.com/embed/v2/${videoId}" allowfullscreen loading="lazy"></iframe></div>`;
+                        }
                     } 
-                    
-                    // Lógica para FACEBOOK
+                    // CASO FACEBOOK
                     else if (link.includes("facebook.com") || link.includes("fb.watch")) {
-                        return `<div class="video-wrapper"><iframe src="https://www.facebook.com/plugins/video.php?href=${encodeURIComponent(link)}&show_text=0" allowfullscreen></iframe></div>`;
+                        htmlVideo = `<div class="video-wrapper"><iframe src="https://www.facebook.com/plugins/video.php?href=${encodeURIComponent(link)}&show_text=0" allowfullscreen loading="lazy"></iframe></div>`;
                     } 
-                    
-                    // Lógica para YOUTUBE
+                    // CASO YOUTUBE
                     else {
                         let yid = "";
                         if (link.includes("v=")) yid = link.split("v=")[1].split("&")[0];
                         else if (link.includes("youtu.be/")) yid = link.split("youtu.be/")[1].split("?")[0];
-                        else yid = link; // Por si es solo el ID
-                        return `<div class="video-wrapper"><iframe src="https://www.youtube.com/embed/${yid}" allowfullscreen></iframe></div>`;
+                        else yid = link;
+                        
+                        htmlVideo = `<div class="video-wrapper"><iframe src="https://www.youtube.com/embed/${yid}" allowfullscreen loading="lazy"></iframe></div>`;
                     }
-                }).join('');
+
+                    if (htmlVideo) container.innerHTML += htmlVideo;
+                });
+
+                // Reiniciar animaciones de entrada si usas AOS
+                if (window.AOS) AOS.refresh();
+
             } else {
-                container.innerHTML = "<p style='text-align:center; grid-column: 1/-1;'>Próximamente más videos...</p>";
+                container.innerHTML = "<p>Aún no se han agregado videos en el panel.</p>";
             }
 
         } catch (error) {
-            console.error("Error al conectar con el panel de administración:", error);
+            console.error("ERROR CRÍTICO:", error);
+            // Mensaje de ayuda en la consola para ti
+            console.log("Asegúrate de que el archivo existe en: https://josue1204.github.io/SpaErika/data/config.json");
         }
     }
 
-    // Ejecutar carga al iniciar la página
-    window.addEventListener('load', cargarContenido);
+    // Ejecutar inmediatamente y también cuando todo cargue
+    cargarContenido();
+    window.onload = cargarContenido;
 </script>
 
 </body>
